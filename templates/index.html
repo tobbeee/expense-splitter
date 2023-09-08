@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Splitter</title>
+</head>
+<body>
+    <h1>Expense Splitter</h1> 
+
+    <h2>Add Participant</h2>
+    <form method="POST" action="/add_participant">
+        <input type="text" name="participant_name" placeholder="Participant Name" required>
+        <button type="submit">Add Participant</button>
+    </form>
+
+    <h2>Add Expense</h2>
+    <form method="POST" action="/add_expense">
+        <input type="text" name="expense_description" placeholder="Expense Description" required>
+        <input type="number" name="expense_amount" placeholder="Expense Amount" required>
+        <select name="expense_payer">
+            {% for participant in participants %}
+                <option value="{{ participant }}">{{ participant }}</option>
+            {% endfor %}
+        </select>
+        <div> <!-- Start a new line for "Select Participants" -->
+            <label>Select Participants:</label>
+        </div>
+        {% for participant in participants %}
+            <input type="checkbox" name="expense_participants" value="{{ participant }}"> {{ participant }}<br>
+        {% endfor %}
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Expenses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Payer</th>
+                <th>Participants</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.payer }}</td>
+                    <td>
+                        <ul>
+                            {% for participant in expense.participants %}
+                                <li>{{ participant }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <h2>Compute Owed Amount</h2>
+    <form method="POST" action="/compute_owed_amount">
+        <button type="submit">Compute Owed Amount</button>
+    </form>
+
+    <h2>Owed Amounts</h2>
+    <ul>
+        {% for participant, amount_owed in participants.items() %}
+            <li>{{ participant }} owes {{ "%.2f"|format(amount_owed) }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Reset All</h2>
+    <form method="POST" action="/reset">
+        <button type="submit">Reset All</button>
+    </form>
+
+</body>
+</html>

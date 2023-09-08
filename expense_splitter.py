@@ -11,13 +11,13 @@ class ExpenseSplitter:
             'description' : description,
             'amount' : amount,
             'payer' : payer,
-            'participant' : participants
+            'participants' : participants
         })
         
-    def compute_owed_amount(self): 
+    def compute_owed_amount(self):     
         for expense in self.expenses:
-            participant_amount = expense['amount'] / len(expense['participant'])
-            for participant in expense['participant']:
+            participant_amount = expense['amount'] / len(expense['participants'])
+            for participant in expense['participants']:
                 if participant != expense['payer']:
                     self.participants[participant] += participant_amount
                     
