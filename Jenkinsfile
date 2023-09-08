@@ -50,5 +50,24 @@ pipeline {
         }
       }
     }
+        stage("Deploy to Azure VM") {
+      steps {
+        script {
+          // SSH into your Azure VM
+          def remote = [:]
+          remote.name = 'AzureVM'
+          remote.host = '40.113.109.154'
+          remote.user = 'tobbeee'
+          remote.identityFile = credentials('azure')
+
+          // SSH steps to pull the Docker image and run the container
+          remote.command = """
+            sudo docker pull ${IMAGE_NAME}
+            sudo docker run -p 80:80 ${IMAGE_NAME}
+          """
+          sshCommand(remote)
+        }
+      }
+    }
   }
 }
