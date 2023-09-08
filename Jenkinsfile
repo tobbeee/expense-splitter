@@ -50,28 +50,5 @@ pipeline {
         }
       }
     }
-    
-    stage("Deploy container in Azure VM") {
-      steps {
-        script {
-          def azureCredential = credentials('azure')
-
-          // Define the SSH commands separately
-          def sshPullCommand = "ssh -i ${azureCredential} tobbeee@40.113.109.154 'sudo docker pull ${IMAGE_NAME}'"
-          def sshRunCommand = "ssh -i ${azureCredential} tobbeee@40.113.109.154 'sudo docker run -p 80:80 ${IMAGE_NAME}'"
-
-          // Execute the SSH commands
-          def pullExitCode = sh(script: sshPullCommand, returnStatus: true)
-          if (pullExitCode != 0) {
-            error "Failed to pull Docker image with exit code: ${pullExitCode}"
-          }
-
-          def runExitCode = sh(script: sshRunCommand, returnStatus: true)
-          if (runExitCode != 0) {
-            error "Failed to run Docker container with exit code: ${runExitCode}"
-          }
-        }
-      }
-    }
   }
 }
