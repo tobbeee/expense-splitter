@@ -54,15 +54,15 @@ pipeline {
     stage("Deploy container in Azure VM") {
       steps {
         script {
-           def azureCredential = credentials('azure')
+          def azureCredential = credentials('azure')
 
-           sshagent(['azure']) {
-            sh """
-              ssh -i ${azureCredential} tobbeee@40.113.109.154 \
-              'sudo docker pull ${IMAGE_NAME} &&
-              sudo docker run -p 80:80 ${IMAGE_NAME}'
-            """
-          }
+          def sshCommand = """
+            ssh -i ${azureCredential} tobbeee@40.113.109.154 \\
+            'sudo docker pull ${IMAGE_NAME} &&
+            sudo docker run -p 80:80 ${IMAGE_NAME}'
+          """
+          
+          sh(script: sshCommand, returnStatus: true)
         }
       }
     }
