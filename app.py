@@ -41,4 +41,4 @@ def reset_all():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host='4.180.199.250', port=8080, debug=True)
+    app.run(debug=True)
