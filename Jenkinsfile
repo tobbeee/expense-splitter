@@ -56,9 +56,10 @@ pipeline {
         script {
           def azureCredential = credentials('azure')
 
-          def sshCommand = """\
-            ssh -i ${azureCredential} tobbeee@40.113.109.154 \\
-            'sudo docker pull ${IMAGE_NAME}' && \\
+          // Define the SSH command
+          def sshCommand = """
+            ssh -i ${azureCredential} tobbeee@40.113.109.154 \
+            'sudo docker pull ${IMAGE_NAME}' && \
             'sudo docker run -p 80:80 ${IMAGE_NAME}'
           """
 
