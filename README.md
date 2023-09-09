@@ -34,4 +34,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ![Screenshot](pipeline.PNG)
 
-In this release, the deployment to azure server did not work as intended. This will be updated in the next release, which will make it possible to run the application in the web browser, without having to set up a Docker container!
+In this release, the deployment to the Azure server (VM) did not work as intended. This will be updated in the next release, which will make it possible to run the application in the web browser, without having to set up a Docker container, nor running it on your own machine!
