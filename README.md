@@ -10,7 +10,7 @@ Expense Splitter is a web application designed to simplify the process of dividi
 
 To be able to run the application, you need to have Docker installed on your machine.
 
-1. **Pull the repository from DockerHub:**\
+1. **Pull the image from DockerHub:**\
 docker pull tobbeee/expense_splitter:latest
 
 3. **Run the Docker container:**\
