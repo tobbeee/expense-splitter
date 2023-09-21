@@ -26,7 +26,7 @@ pipeline {
 
     stage("Build environment") {
       steps {
-        sh "python3 pip install -r requirements.txt"
+        sh "python3 -m pip install -r requirements.txt"
       }
     }
 
