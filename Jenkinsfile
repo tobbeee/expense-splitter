@@ -18,6 +18,12 @@ pipeline {
       }
     }
 
+    stage("Build environment") {
+      steps {
+        sh "python3 pip install -r requirements.txt"
+      }
+    }
+
     stage("Checkout from SCM") {
       steps {
         git branch: "main", credentialsId: "github", url:"https://github.com/tobbeee/expense-splitter"
