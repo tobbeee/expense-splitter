@@ -18,6 +18,12 @@ def test_add_participant_route(client):
     assert response.status_code == 302  # Redirects to index
     response = client.get('/')
     assert b"Tobias" in response.data
+    
+def test_add_participant_if_not_pablo_route(client):
+    response = client.post('/add_participant', data = {'participant_name':'pablo'})
+    assert response.status_code == 302
+    response = client.get('/')
+    assert b"pablo" not in response.data
 
 def test_add_expense_route(client):
     client.post('/add_participant', data={'participant_name': 'Tobias'})

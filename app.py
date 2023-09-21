@@ -13,7 +13,8 @@ def index():
 @app.route('/add_participant', methods=['POST'])
 def add_participant():
     name = request.form['participant_name']
-    expense_splitter.add_participant(name)
+    if name != "pablo":
+        expense_splitter.add_participant(name)
     return redirect(url_for('index'))
 
 @app.route('/add_expense', methods=['POST'])
