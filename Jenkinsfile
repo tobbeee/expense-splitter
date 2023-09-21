@@ -20,7 +20,7 @@ pipeline {
 
     stage("Checkout from SCM") {
       steps {
-        git branch: "main", credentialsId: "github", url:"https://github.com/tobbeee/expense-splitter"
+        git branch: "remove_pablo", credentialsId: "github", url:"https://github.com/tobbeee/expense-splitter"
       }
     }
 
